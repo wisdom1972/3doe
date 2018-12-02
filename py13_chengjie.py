@@ -3,7 +3,11 @@
 """
 Created on Sat May 19 13:56:21 2018
 
-@author: wisdomimac
+@author: Wisdom Zhang, 
+
+Objective: Read PTS-S200 point cloud data into Python, 
+
+
 
 1- 读入点云文件
 2- 将点云作为数组

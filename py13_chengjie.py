@@ -16,7 +16,6 @@ Objective: Read PTS-S200 point cloud data into Python,
 
 """
 
-
 from __future__ import print_function
 #import csv
 import numpy as np
@@ -40,8 +39,10 @@ plane1.x = plane.x
 plane1.y=plane.y
 plane1.z=plane.z-1
 '''
+
+# Write the dsc file to CSV format file. 
         
-np.savetxt('new.csv', left_plane, delimiter = ',')  
+np.savetxt('3doepoint2csv.csv', left_plane, delimiter = ',')  
 
 
 # x轴的采样点

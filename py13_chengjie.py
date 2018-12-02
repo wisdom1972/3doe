@@ -3,11 +3,7 @@
 """
 Created on Sat May 19 13:56:21 2018
 
-@author: Wisdom Zhang, 
-
-Objective: Read PTS-S200 point cloud data into Python, 
-
-
+@author: wisdomimac
 
 1- 读入点云文件
 2- 将点云作为数组
@@ -16,33 +12,34 @@ Objective: Read PTS-S200 point cloud data into Python,
 
 """
 
+
 from __future__ import print_function
 #import csv
 import numpy as np
 import pandas as pd
+from mpl_toolkits.mplot3d import Axes3D
 
 
 
 #my_matrix = np.loadtxt(open("095927_R-fixed-left.csv","rb"),delimiter=",",skiprows=0)  
 
 #left_plane = np.loadtxt(open("chengjie_3d.txt","rb"),delimiter=",",skiprows=1)  
-left_plane = np.loadtxt(open("diandn.asc","rb"),delimiter=" ",skiprows=0)  
 
+#left_plane = np.loadtxt(open("diandn.asc","rb"),delimiter=" ",skiprows=0)  
+left_plane = np.loadtxt(open("diandn_0.asc","rb"),delimiter=" ",skiprows=0)  
 
 
 plane = pd.DataFrame({'x':left_plane[:,0],'y':left_plane[:,1],'z':left_plane[:,2]})
 
-'''
+
 plane1= pd.DataFrame()
 
 plane1.x = plane.x
 plane1.y=plane.y
 plane1.z=plane.z-1
-'''
 
-# Write the dsc file to CSV format file. 
         
-np.savetxt('3doepoint2csv.csv', left_plane, delimiter = ',')  
+np.savetxt('new.csv', left_plane, delimiter = ',')  
 
 
 # x轴的采样点
@@ -80,17 +77,25 @@ plt.plot(left_plane[:,1], left_plane[:,2], '.')
 
 
 
-fig = plt.figure('3D scatter plot')
-ax = fig.add_subplot(111, projection='3d')
+#fig = plt.figure('3D scatter plot')
+#ax = fig.add_subplot(111, projection='3d')
 
-#ax.scatter(x,y,z, c='r', marker='o')
-#ax.scatter(lowers[:, 0], lowers[:, 1], lowers[:, 2], c='g', marker='^')
+######
 
 
-ax.scatter(uppers[:, 0], uppers[:, 1], uppers[:, 2], c='b', marker='o')
+ax = plt.subplot(111, projection='3d')  # 创建一个三维的绘图工程
+#  将数据点分成三部分画，在颜色上有区分度
+ax.scatter(uppers[:, 0], uppers[:, 1], uppers[:, 2], c='r', marker='o')
 ax.scatter(lowers[:, 0], lowers[:, 1], lowers[:, 2], c='g', marker='^')
 
+
+ax.set_zlabel('Z')  # 坐标轴
+ax.set_ylabel('Y')
+ax.set_xlabel('X')
+plt.show()
+
+
 # 将平面下移动一个单位， 因为点云的Z数据mean是1
-#ax.scatter(plane1.x, plane1.y, plane1.z, c='b', marker='^')
+# ax.scatter(plane1.x, plane1.y, plane1.z, c='b', marker='^')
  
 plt.show()
